@@ -16,7 +16,7 @@ limitations under the License. */
 package go_kafka_client
 
 import (
-	avro "github.com/stealthly/go-avro"
+	avro "github.com/iobeam/go-avro"
 	"testing"
 )
 

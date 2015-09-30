@@ -18,8 +18,8 @@ package go_kafka_client
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/stealthly/go-avro"
-	avroline "github.com/stealthly/go_kafka_client/avro"
+	"github.com/iobeam/go-avro"
+	avroline "github.com/iobeam/go_kafka_client/avro"
 	"regexp"
 	"strings"
 )

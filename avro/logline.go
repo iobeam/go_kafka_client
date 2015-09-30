@@ -1,6 +1,6 @@
 package avro
 
-import "github.com/stealthly/go-avro"
+import "github.com/iobeam/go-avro"
 
 type LogLine struct {
 	Line      interface{}

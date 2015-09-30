@@ -17,7 +17,7 @@ package go_kafka_client
 
 import (
 	"fmt"
-	"github.com/stealthly/go_kafka_client/avro"
+	"github.com/iobeam/go_kafka_client/avro"
 	"time"
 )
 

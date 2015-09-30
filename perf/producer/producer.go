@@ -19,9 +19,9 @@ import (
 	"flag"
 	"fmt"
 	"github.com/golang/protobuf/proto"
-	"github.com/stealthly/go-avro"
-	kafka "github.com/stealthly/go_kafka_client"
-	sp "github.com/stealthly/go_kafka_client/syslog/syslog_proto"
+	"github.com/iobeam/go-avro"
+	kafka "github.com/iobeam/go_kafka_client"
+	sp "github.com/iobeam/go_kafka_client/syslog/syslog_proto"
 	"os"
 	"strings"
 	"time"
@@ -106,10 +106,10 @@ func produceAvro() {
 		panic(err)
 	}
 
-    _, err = kafka.NewCachedSchemaRegistryClient(*schemaRegistry).Register(avroSchema.GetName() + "-value", avroSchema)
-    if err != nil {
-        panic(err)
-    }
+	_, err = kafka.NewCachedSchemaRegistryClient(*schemaRegistry).Register(avroSchema.GetName()+"-value", avroSchema)
+	if err != nil {
+		panic(err)
+	}
 
 	decoder := kafka.NewKafkaAvroDecoder(*schemaRegistry)
 	go func() {
@@ -120,7 +120,7 @@ func produceAvro() {
 			}
 			record := rawRecord.(*avro.GenericRecord)
 			timings := record.Get("timings").([]interface{})
-			timings = append(timings, time.Now().UnixNano() / int64(time.Millisecond))
+			timings = append(timings, time.Now().UnixNano()/int64(time.Millisecond))
 			record.Set("timings", timings)
 
 			producer2.Input() <- &kafka.ProducerMessage{Topic: *topic2, Value: record}
@@ -149,12 +149,12 @@ func parseAndValidateArgs() {
 		os.Exit(1)
 	}
 
-    if *schemaRegistry != "" {
-	    protobuf = false
-        if *avroSchema == "" {
-            fmt.Println("Avro schema is required")
-            os.Exit(1)
-        }
+	if *schemaRegistry != "" {
+		protobuf = false
+		if *avroSchema == "" {
+			fmt.Println("Avro schema is required")
+			os.Exit(1)
+		}
 	}
 
 	if *perSecond <= 0 {
